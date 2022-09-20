@@ -87,3 +87,13 @@ https://docs.bitfinex.com/reference/ws-public-status
 ### Huobi - https://www.huobi.com/en-us/
 
 ### Kraken - https://www.kraken.com/
+
+---
+
+    // const ws = new WebSocket(
+    //     'wss://stream.binance.com:9443/ws/etheur@trade',
+    // )
+    // ws.onmessage = e => console.log(e.data)
+
+
+    // https://api.binance.com/api/v3/ticker/price
