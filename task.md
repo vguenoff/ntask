@@ -79,14 +79,27 @@ Please upload your complete source code to a GitHub repo.
 
 https://binance-docs.github.io/apidocs/spot/en/#aggregate-trade-streams
 
+https://api.binance.com/api/v3/exchangeInfo
+https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT
+https://api.binance.com/api/v3/trades?symbol=BTCUSDT&limit=5
+
 ### Bitfinex - https://www.bitfinex.com/
 
-https://docs.bitfinex.com/docs/ws-general#how-to-connect
-https://docs.bitfinex.com/reference/ws-public-status
+https://api-pub.bitfinex.com/v2/conf/pub:list:pair:exchange
+https://api-pub.bitfinex.com/v2/ticker/tBTCUSD
+https://api-pub.bitfinex.com/v2/trades/tBTCUSD/hist
 
 ### Huobi - https://www.huobi.com/en-us/
 
+https://api.huobi.pro/market/tickers
+https://api.huobi.pro/market/detail/merged?symbol=btcusdc
+https://api.huobi.pro/market/history/kline?period=1day&size=5&symbol=btcusdt
+
 ### Kraken - https://www.kraken.com/
+
+https://api.kraken.com/0/public/AssetPairs
+https://api.kraken.com/0/public/Ticker?pair=WBTCUSD
+https://api.kraken.com/0/public/Trades?pair=XBTUSD&since=1663712570607
 
 ---
 

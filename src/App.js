@@ -3,10 +3,13 @@ import { useFetchExchangeInfoQuery } from 'features/exchanges/exchangesApiSlice'
 import './App.scss'
 
 function findMatches(searchInput, symbols) {
-    return symbols.filter(symbol => {
-        const regex = new RegExp(searchInput.trim().split(' ').join(), 'gi')
-        return symbol.symbol.match(regex)
-    })
+    if (!searchInput) return []
+
+    return symbols.filter(({ symbol }) =>
+        symbol
+            .toLowerCase()
+            .includes(searchInput.toLowerCase().replace(/[^a-z0-9]/g, '')),
+    )
 }
 
 function App() {
@@ -31,19 +34,20 @@ function App() {
                     onChange={e => {
                         setSearchInput(e.target.value)
 
-                        console.log(findMatches(e.target.value, symbols))
-
                         setMatches(findMatches(e.target.value, symbols))
                     }}
                 />
                 <ul className="suggestions">
-                    {/* <li>Filter for a city</li>
-                    <li>or a state</li> */}
-                    {matches?.map(({ baseAsset, quoteAsset, symbol }) => (
-                        <li>
-                            {baseAsset} {quoteAsset} {symbol}
-                        </li>
-                    ))}
+                    {matches?.map(({ baseAsset, quoteAsset, symbol }) => {
+                        return (
+                            <li key={symbol}>
+                                <span>
+                                    {baseAsset} / {quoteAsset}
+                                </span>
+                                <span className="symbol">{symbol}</span>
+                            </li>
+                        )
+                    })}
                 </ul>
             </form>
         </div>
