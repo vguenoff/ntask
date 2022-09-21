@@ -1,12 +1,10 @@
-import { string } from 'prop-types'
 import { useFetchHistoryQuery } from 'features/exchanges/exchangesApiSlice'
+import useSplitParams from 'hooks/useSplitParams'
+
 import './index.scss'
 
-History.propTypes = {
-    symbol: string.isRequired,
-}
-
-export default function History({ symbol }) {
+export default function History() {
+    const { symbol } = useSplitParams()
     const { data = [] } = useFetchHistoryQuery(symbol)
 
     return (
