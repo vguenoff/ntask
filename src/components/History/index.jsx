@@ -1,6 +1,6 @@
 import { string } from 'prop-types'
 import { useFetchHistoryQuery } from 'features/exchanges/exchangesApiSlice'
-import './History.scss'
+import './index.scss'
 
 History.propTypes = {
     symbol: string.isRequired,
@@ -22,7 +22,7 @@ export default function History({ symbol }) {
                                 Price/Qty: {price} / {qty}
                             </span>
                             <span>
-                                {date} {hourFormat}
+                                {hourFormat} / {date}
                             </span>
                         </li>
                     )

@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom'
 import { bool, func, string } from 'prop-types'
 
-import './Modal.scss'
+import './index.scss'
 
 Modal.propTypes = {
     isShowing: bool.isRequired,

@@ -1,16 +1,13 @@
 .History {
+    min-height: 200px;
+
     ul {
         padding: 0;
 
         li {
             display: flex;
-            padding: 5px 1px;
+            padding: 5px 5px 5px 0;
             justify-content: space-between;
-
-            span {
-                display: block;
-                align-self: baseline;
-            }
 
             &:nth-child(odd) {
                 background: linear-gradient(to top, #efefef 0%, #ffffff 100%);

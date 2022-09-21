@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { useFetchExchangeInfoQuery } from 'features/exchanges/exchangesApiSlice'
 import { findMatches } from 'utils'
 
-import './App.scss'
-import Exchange from './Exchange'
+import './index.scss'
+import Exchange from '../Exchange'
 
-export default function App() {
+export default function Search() {
     const [searchInput, setSearchInput] = useState('')
     const [matches, setMatches] = useState(null)
     const [selectedSymbol, setSelectedSymbol] = useState(null)
@@ -17,7 +17,7 @@ export default function App() {
     }))
 
     return (
-        <div className="App">
+        <div className="Search">
             <form
                 className="search-form"
                 onSubmit={e => e.preventDefault()}
