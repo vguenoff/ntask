@@ -1,8 +1,5 @@
 import { useState } from 'react'
-import {
-    useFetchExchangeInfoQuery,
-    useFetchPriceQuery,
-} from 'features/exchanges/exchangesApiSlice'
+import { useFetchExchangeInfoQuery } from 'features/exchanges/exchangesApiSlice'
 import { findMatches } from 'utils'
 
 import './App.scss'
@@ -13,7 +10,6 @@ function App() {
     const [matches, setMatches] = useState(null)
     const [selectedSymbol, setSelectedSymbol] = useState(null)
     const { data = [], isFetching } = useFetchExchangeInfoQuery()
-    const [binancePrice, setBinancePrice] = useState(null)
     const symbols = data?.symbols?.map(({ baseAsset, quoteAsset, symbol }) => ({
         baseAsset,
         quoteAsset,
