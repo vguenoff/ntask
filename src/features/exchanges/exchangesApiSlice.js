@@ -17,8 +17,17 @@ export const binanceApiSlice = createApi({
                     return `/ticker/price?symbol=${symbol}`
                 },
             }),
+            fetchHistory: builder.query({
+                query(symbol) {
+                    return `/trades?symbol=${symbol}&limit=5`
+                },
+            }),
         }
     },
 })
 
-export const { useFetchExchangeInfoQuery, useFetchPriceQuery } = binanceApiSlice
+export const {
+    useFetchExchangeInfoQuery,
+    useFetchPriceQuery,
+    useFetchHistoryQuery,
+} = binanceApiSlice
