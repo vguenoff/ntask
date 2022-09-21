@@ -1,14 +1,14 @@
-import { useFetchHistoryQuery } from 'features/exchanges/exchangesApiSlice'
+import { useFetchDetailsQuery } from 'features/exchanges/exchangesApiSlice'
 import useSplitParams from 'hooks/useSplitParams'
 
 import './index.scss'
 
-export default function History() {
+export default function Details() {
     const { symbol } = useSplitParams()
-    const { data = [] } = useFetchHistoryQuery(symbol)
+    const { data = [] } = useFetchDetailsQuery(symbol)
 
     return (
-        <div className="History">
+        <div className="Details">
             <ul>
                 {data?.map(({ id, price, qty, time }) => {
                     const [date, hour] = new Date(time).toISOString().split('T')

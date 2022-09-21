@@ -23,24 +23,26 @@ export default function Exchange() {
     return (
         <>
             {!isFetching && (
-                <section className="results">
-                    <span>Binance</span>
-                    <span
-                        className="symbol"
-                        onClick={() => {
-                            navigate('details')
-                            toggleModal()
-                        }}
-                    >
-                        1 {baseAsset} = {data.price} {quoteAsset}
-                    </span>
+                <>
+                    <section className="results">
+                        <span>Binance</span>
+                        <span
+                            className="symbol"
+                            onClick={() => {
+                                navigate('details')
+                                toggleModal()
+                            }}
+                        >
+                            1 {baseAsset} = {data.price} {quoteAsset}
+                        </span>
+                    </section>
                     <Modal
                         title={`${symbol}: Last 5 transactions on Binance`}
                         {...{ toggleModal, isShowing }}
                     >
                         <Outlet />
                     </Modal>
-                </section>
+                </>
             )}
         </>
     )

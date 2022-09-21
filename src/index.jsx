@@ -6,7 +6,7 @@ import { store } from 'app/store'
 import Search from 'components/Search'
 import reportWebVitals from './reportWebVitals'
 import Exchange from 'components/Exchange'
-import History from 'components/History'
+import Details from 'components/Details'
 
 import './index.scss'
 
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: 'details',
-                        element: <History />,
+                        element: <Details />,
                     },
                 ],
             },
