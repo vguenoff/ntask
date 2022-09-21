@@ -5,7 +5,7 @@ import { findMatches } from 'utils'
 import './App.scss'
 import Exchange from './Exchange'
 
-function App() {
+export default function App() {
     const [searchInput, setSearchInput] = useState('')
     const [matches, setMatches] = useState(null)
     const [selectedSymbol, setSelectedSymbol] = useState(null)
@@ -73,5 +73,3 @@ function App() {
         </div>
     )
 }
-
-export default App
