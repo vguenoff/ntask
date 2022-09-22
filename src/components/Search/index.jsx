@@ -1,18 +1,26 @@
 import { useState } from 'react'
-import { useFetchExchangeInfoQuery } from 'features/exchanges/exchangesApiSlice'
+
 import { findMatches } from 'utils'
 import { useNavigate, Outlet } from 'react-router-dom'
 import useSplitParams from 'hooks/useSplitParams'
+import useAllExchangeInfoData from 'hooks/useAllExchangeInfoData'
 
 import './index.scss'
 
 export default function Search() {
-    const { data = [] } = useFetchExchangeInfoQuery()
     const { symbol } = useSplitParams()
-    const [searchInput, setSearchInput] = useState('')
-    const [matches, setMatches] = useState(null)
-    const [selectedSymbol, setSelectedSymbol] = useState(symbol)
+    const uniqueData = useAllExchangeInfoData()
     const navigate = useNavigate()
+    const [searchInput, setSearchInput] = useState('')
+    const [selectedSymbol, setSelectedSymbol] = useState(symbol)
+    const [matches, setMatches] = useState([])
+
+    const handleSelect = ({ baseAsset, quoteAsset, symbol }) => {
+        setMatches([])
+        setSearchInput('')
+        setSelectedSymbol(symbol)
+        navigate(`${baseAsset}_${quoteAsset}`)
+    }
 
     return (
         <div className="Search">
@@ -21,12 +29,7 @@ export default function Search() {
                 onSubmit={e => e.preventDefault()}
                 onKeyDown={e => {
                     if (e.key === 'Enter') {
-                        const { baseAsset, quoteAsset, symbol } = matches[0]
-
-                        setMatches(null)
-                        setSearchInput('')
-                        setSelectedSymbol(symbol)
-                        navigate(`${baseAsset}_${quoteAsset}`)
+                        handleSelect(matches[0]) // TODO: handle select with arrow keys
                     }
                 }}
             >
@@ -37,21 +40,18 @@ export default function Search() {
                     value={searchInput}
                     onChange={e => {
                         setSearchInput(e.target.value)
-                        setMatches(findMatches(e.target.value, data.symbols))
+                        setMatches(findMatches(e.target.value, uniqueData))
                         setSelectedSymbol(null)
                     }}
                 />
                 <ul className="suggestions">
-                    {matches?.map(({ baseAsset, quoteAsset, symbol }) => {
+                    {matches.map(match => {
+                        const { baseAsset, quoteAsset, symbol } = match
+
                         return (
                             <li
                                 key={symbol}
-                                onClick={() => {
-                                    setMatches(null)
-                                    setSearchInput('')
-                                    setSelectedSymbol(symbol)
-                                    navigate(`${baseAsset}_${quoteAsset}`)
-                                }}
+                                onClick={() => handleSelect(match)}
                             >
                                 <span>
                                     {baseAsset} / {quoteAsset}

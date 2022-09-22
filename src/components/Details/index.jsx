@@ -1,11 +1,12 @@
-import { useFetchDetailsQuery } from 'features/exchanges/exchangesApiSlice'
+import { useOutletContext } from 'react-router-dom'
 import useSplitParams from 'hooks/useSplitParams'
 
 import './index.scss'
 
 export default function Details() {
+    const { useFetchDetails } = useOutletContext()
     const { symbol } = useSplitParams()
-    const { data = [] } = useFetchDetailsQuery(symbol)
+    const { data = [] } = useFetchDetails(symbol)
 
     return (
         <div className="Details">

@@ -7,17 +7,17 @@ export const binanceApiSlice = createApi({
     }),
     endpoints(builder) {
         return {
-            fetchExchangeInfo: builder.query({
+            fetchBinanceExchangeInfo: builder.query({
                 query() {
                     return `/exchangeInfo`
                 },
             }),
-            fetchPrice: builder.query({
+            fetchBinancePrice: builder.query({
                 query(symbol) {
                     return `/ticker/price?symbol=${symbol}`
                 },
             }),
-            fetchDetails: builder.query({
+            fetchBinanceDetails: builder.query({
                 query(symbol) {
                     return `/trades?symbol=${symbol}&limit=5`
                 },
@@ -27,7 +27,7 @@ export const binanceApiSlice = createApi({
 })
 
 export const {
-    useFetchExchangeInfoQuery,
-    useFetchPriceQuery,
-    useFetchDetailsQuery,
+    useFetchBinanceExchangeInfoQuery,
+    useFetchBinancePriceQuery,
+    useFetchBinanceDetailsQuery,
 } = binanceApiSlice

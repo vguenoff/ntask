@@ -1,19 +1,16 @@
 import { useState } from 'react'
 import { useNavigate, useLocation, Outlet } from 'react-router-dom'
-import { useFetchPriceQuery } from 'features/exchanges/exchangesApiSlice'
-import Modal from 'components/Modal'
 import useSplitParams from 'hooks/useSplitParams'
+import Modal from 'components/Modal'
 
-import './index.scss'
+import './SingleExchange.scss'
 
-export default function Exchange() {
+export default function SingleExchange({ name, useFetch, useFetchDetails }) {
     const { symbol, baseAsset, quoteAsset } = useSplitParams()
-    const { data = {}, isFetching } = useFetchPriceQuery(symbol)
+    const { data = {}, isFetching } = useFetch(symbol)
+    const { pathname } = useLocation()
+    const [isShowing, setIsShowing] = useState(pathname.includes('details'))
     const navigate = useNavigate()
-    const location = useLocation()
-    const [isShowing, setIsShowing] = useState(
-        location.pathname.includes('details'),
-    )
 
     const toggleModal = () => {
         setIsShowing(!isShowing)
@@ -25,22 +22,23 @@ export default function Exchange() {
             {!isFetching && (
                 <>
                     <section className="results">
-                        <span>Binance</span>
+                        <span>{name}</span>
                         <span
                             className="symbol"
                             onClick={() => {
-                                navigate('details')
+                                navigate(`details/${name.toLowerCase()}`)
                                 toggleModal()
                             }}
                         >
-                            1 {baseAsset} = {data.price} {quoteAsset}
+                            1 {baseAsset} = {data.price || data.tick.ask[0]}{' '}
+                            {quoteAsset}
                         </span>
                     </section>
                     <Modal
-                        title={`${symbol}: Last 5 transactions on Binance`}
+                        title={`${baseAsset}/${quoteAsset}: Last 5 transactions on ${name}`}
                         {...{ toggleModal, isShowing }}
                     >
-                        <Outlet />
+                        <Outlet context={{ useFetchDetails }} />
                     </Modal>
                 </>
             )}
