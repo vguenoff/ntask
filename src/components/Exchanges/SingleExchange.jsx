@@ -17,6 +17,7 @@ export default function SingleExchange({
     useFetchDetails,
     isFetching,
     priceAvailable,
+    error,
 }) {
     const { baseAsset, quoteAsset } = useSplitParams()
     const { pathname } = useLocation()
@@ -36,7 +37,10 @@ export default function SingleExchange({
                 <>
                     <section className="results">
                         <span>{name}</span>
-                        {priceAvailable ? (
+
+                        {error ? (
+                            <span className="error">Network error</span>
+                        ) : priceAvailable ? (
                             <span
                                 className="symbol"
                                 onClick={() => {

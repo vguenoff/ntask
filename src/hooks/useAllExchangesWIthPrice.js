@@ -22,10 +22,16 @@ export default function useAllExchangesWIthPrice() {
     const [exchanges, setExchanges] = useState([])
 
     const { symbol } = useSplitParams()
-    const { data: binanceData, isFetching: isBinanceFetching } =
-        useFetchBinancePriceQuery(symbol)
-    const { data: huobiData, isFetching: isHuobiFetching } =
-        useFetchHuobiPriceQuery(symbol)
+    const {
+        data: binanceData,
+        isFetching: isBinanceFetching,
+        error: binanceDataError,
+    } = useFetchBinancePriceQuery(symbol)
+    const {
+        data: huobiData,
+        isFetching: isHuobiFetching,
+        error: huobiDataError,
+    } = useFetchHuobiPriceQuery(symbol)
 
     useEffect(() => {
         if (!(isBinanceFetching && isHuobiFetching)) {
@@ -37,6 +43,7 @@ export default function useAllExchangesWIthPrice() {
                     priceAvailable: Number(
                         getObjValueFromPath(binanceData, 'price'),
                     ),
+                    error: binanceDataError,
                 },
                 {
                     name: 'Huobi',
@@ -45,12 +52,20 @@ export default function useAllExchangesWIthPrice() {
                     priceAvailable: Number(
                         getObjValueFromPath(huobiData, 'tick.ask.0'),
                     ),
+                    error: huobiDataError,
                 },
             ]
 
             setExchanges(exchangesInitial)
         }
-    }, [binanceData, isBinanceFetching, huobiData, isHuobiFetching])
+    }, [
+        binanceData,
+        isBinanceFetching,
+        huobiData,
+        isHuobiFetching,
+        binanceDataError,
+        huobiDataError,
+    ])
 
     return [exchanges, setExchanges]
 }
