@@ -3,17 +3,17 @@ import { useState, useEffect } from 'react'
 import {
     useFetchBinancePriceQuery,
     useFetchBinanceDetailsQuery,
-} from 'features/exchanges/binanceApiSlice'
+} from 'app/slices/binanceApiSlice'
 
 // import {
 //     useFetchBitfinexPriceQuery,
 //     useFetchBitfinexDetailsQuery,
-// } from 'features/exchanges/bitfinexApiSlice'
+// } from 'app/apiSlices/bitfinexApiSlice'
 
 import {
     useFetchHuobiPriceQuery,
     useFetchHuobiDetailsQuery,
-} from 'features/exchanges/huobiApiSlice'
+} from 'app/slices/huobiApiSlice'
 
 import useSplitParams from 'hooks/useSplitParams'
 import { getObjValueFromPath } from 'utils'

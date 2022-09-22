@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { binanceApiSlice } from 'features/exchanges/binanceApiSlice'
-import { bitfinexApiSlice } from 'features/exchanges/bitfinexApiSlice'
-import { huobiApiSlice } from 'features/exchanges/huobiApiSlice'
-import { krakenApiSlice } from 'features/exchanges/krakenApiSlice'
+import { binanceApiSlice } from 'app/slices/binanceApiSlice'
+import { bitfinexApiSlice } from 'app/slices/bitfinexApiSlice'
+import { huobiApiSlice } from 'app/slices/huobiApiSlice'
+import { krakenApiSlice } from 'app/slices/krakenApiSlice'
 
 export const store = configureStore({
     reducer: {

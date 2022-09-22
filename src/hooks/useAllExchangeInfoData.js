@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useFetchBinanceExchangeInfoQuery } from 'features/exchanges/binanceApiSlice'
-// import { useFetchBitfinexExchangeInfoQuery } from 'features/exchanges/bitfinexApiSlice'
-import { useFetchHuobiExchangeInfoQuery } from 'features/exchanges/huobiApiSlice'
-// import { useFetchKrakenExchangeInfoQuery } from 'features/exchanges/krakenApiSlice'
+import { useFetchBinanceExchangeInfoQuery } from 'app/slices/binanceApiSlice'
+// import { useFetchBitfinexExchangeInfoQuery } from 'app/apiSlices/bitfinexApiSlice'
+import { useFetchHuobiExchangeInfoQuery } from 'app/slices/huobiApiSlice'
+// import { useFetchKrakenExchangeInfoQuery } from 'app/apiSlices/krakenApiSlice'
 
 import { removeDuplicates } from 'utils'
 
