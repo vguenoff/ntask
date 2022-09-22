@@ -16,23 +16,31 @@ import {
 import SingleExchange from './SingleExchange'
 
 export default function Exchanges() {
+    const exchanges = [
+        {
+            name: 'Binance',
+            useFetch: useFetchBinancePriceQuery,
+            useFetchDetails: useFetchBinanceDetailsQuery,
+            pricePath: 'price',
+        },
+        // {
+        //     name: 'Bitfinex',
+        //     useFetch: useFetchBitfinexPriceQuery,
+        //     useFetchDetails: useFetchBitfinexDetailsQuery,
+        // },
+        {
+            name: 'Huobi',
+            useFetch: useFetchHuobiPriceQuery,
+            useFetchDetails: useFetchHuobiDetailsQuery,
+            pricePath: 'tick.ask.0',
+        },
+    ]
+
     return (
         <>
-            <SingleExchange
-                name="Binance"
-                useFetch={useFetchBinancePriceQuery}
-                useFetchDetails={useFetchBinanceDetailsQuery}
-            />
-            {/* <SingleExchange
-                name="Bitfinex"
-                useFetch={useFetchBitfinexPriceQuery}
-                useFetchDetails={useFetchBitfinexDetailsQuery}
-            /> */}
-            <SingleExchange
-                name="Huobi"
-                useFetch={useFetchHuobiPriceQuery}
-                useFetchDetails={useFetchHuobiDetailsQuery}
-            />
+            {exchanges.map(props => (
+                <SingleExchange key={props.name} {...props} />
+            ))}
         </>
     )
 }

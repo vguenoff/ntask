@@ -2,10 +2,16 @@ import { useState } from 'react'
 import { useNavigate, useLocation, Outlet } from 'react-router-dom'
 import useSplitParams from 'hooks/useSplitParams'
 import Modal from 'components/Modal'
+import { getObjValueFromPath } from 'utils'
 
 import './SingleExchange.scss'
 
-export default function SingleExchange({ name, useFetch, useFetchDetails }) {
+export default function SingleExchange({
+    name,
+    useFetch,
+    useFetchDetails,
+    pricePath,
+}) {
     const { symbol, baseAsset, quoteAsset } = useSplitParams()
     const { data = {}, isFetching } = useFetch(symbol)
     const { pathname } = useLocation()
@@ -30,8 +36,8 @@ export default function SingleExchange({ name, useFetch, useFetchDetails }) {
                                 toggleModal()
                             }}
                         >
-                            1 {baseAsset} = {data.price || data.tick.ask[0]}{' '}
-                            {quoteAsset}
+                            1 {baseAsset} ={' '}
+                            {getObjValueFromPath(data, pricePath)} {quoteAsset}
                         </span>
                     </section>
                     <Modal

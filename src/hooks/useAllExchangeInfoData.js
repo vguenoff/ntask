@@ -34,7 +34,6 @@ export default function useAllExchangeInfoData() {
                 ...huobiDataNormalized,
             ])
 
-            console.log(unique)
             setUniqueData(unique)
         }
     }, [

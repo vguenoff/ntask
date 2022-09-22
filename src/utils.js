@@ -21,3 +21,7 @@ export const removeDuplicates = duplicates => {
 
     return unique
 }
+
+export function getObjValueFromPath(obj, path) {
+    return path.split('.').reduce((acc, cur) => acc && acc[cur], obj)
+}
