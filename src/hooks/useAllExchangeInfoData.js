@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useFetchBinanceExchangeInfoQuery } from 'features/exchanges/binanceApiSlice'
 // import { useFetchBitfinexExchangeInfoQuery } from 'features/exchanges/bitfinexApiSlice'
 import { useFetchHuobiExchangeInfoQuery } from 'features/exchanges/huobiApiSlice'
-import { useFetchKrakenExchangeInfoQuery } from 'features/exchanges/krakenApiSlice'
+// import { useFetchKrakenExchangeInfoQuery } from 'features/exchanges/krakenApiSlice'
 
 import { removeDuplicates } from 'utils'
 
@@ -12,10 +12,8 @@ export default function useAllExchangeInfoData() {
     // const { data: bitfinexData = [] } = useFetchBitfinexExchangeInfoQuery() // cors error
     const { data: huobiData = {} } = useFetchHuobiExchangeInfoQuery()
     // const { data: krakenData = {} } = useFetchKrakenExchangeInfoQuery()
-    // console.log(krakenData)
 
     useEffect(() => {
-        // console.log(bitfinexData)
         if (binanceData.symbols && huobiData.data) {
             const binanceDataNormalized = binanceData?.symbols?.map(
                 ({ baseAsset, quoteAsset, symbol }) => ({
@@ -41,8 +39,9 @@ export default function useAllExchangeInfoData() {
         }
     }, [
         binanceData,
+        //  bitfinexData,
         huobiData,
-        //  bitfinexData
+        // krakenData,
     ])
 
     return uniqueData

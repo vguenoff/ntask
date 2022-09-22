@@ -22,6 +22,32 @@ export const binanceApiSlice = createApi({
                     return `/trades?symbol=${symbol}&limit=5`
                 },
             }),
+            // fetchBinancePriceWS: builder.query({
+            //     query: symbol => `ws/${symbol.toLowerCase()}@trade`,
+            //     async onCacheEntryAdded(
+            //         arg,
+            //         { updateCachedData, cacheDataLoaded, cacheEntryRemoved },
+            //     ) {
+            //         const ws = new WebSocket('wss://stream.binance.com:9443')
+
+            //         try {
+            //             await cacheDataLoaded
+            //             const listener = event => {
+            //                 const data = JSON.parse(event.data)
+            //                 // if (!isMessage(data) || data.channel !== arg) return
+
+            //                 updateCachedData(draft => {
+            //                     draft.push(data)
+            //                 })
+            //             }
+
+            //             ws.addEventListener('message', listener)
+            //         } catch {}
+            //         await cacheEntryRemoved
+
+            //         ws.close()
+            //     },
+            // }),
         }
     },
 })
@@ -30,4 +56,5 @@ export const {
     useFetchBinanceExchangeInfoQuery,
     useFetchBinancePriceQuery,
     useFetchBinanceDetailsQuery,
+    useFetchBinancePriceWSQuery,
 } = binanceApiSlice
