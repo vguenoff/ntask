@@ -1,17 +1,23 @@
 import { useState, useEffect } from 'react'
 import { useFetchBinanceExchangeInfoQuery } from 'app/slices/binanceApiSlice'
-// import { useFetchBitfinexExchangeInfoQuery } from 'app/apiSlices/bitfinexApiSlice'
+// import { useFetchBitfinexExchangeInfoQuery } from 'app/slices/bitfinexApiSlice'
 import { useFetchHuobiExchangeInfoQuery } from 'app/slices/huobiApiSlice'
-// import { useFetchKrakenExchangeInfoQuery } from 'app/apiSlices/krakenApiSlice'
+import //     useFetchKrakenExchangeInfoQuery,
+// useFetchKrakenPriceQuery,
+//     useFetchKrakenDetailsQuery,
+'app/slices/krakenApiSlice'
 
 import { removeDuplicates } from 'utils'
 
 export default function useAllExchangeInfoData() {
     const [uniqueData, setUniqueData] = useState([])
     const { data: binanceData = {} } = useFetchBinanceExchangeInfoQuery()
-    // const { data: bitfinexData = [] } = useFetchBitfinexExchangeInfoQuery() // cors error
     const { data: huobiData = {} } = useFetchHuobiExchangeInfoQuery()
-    // const { data: krakenData = {} } = useFetchKrakenExchangeInfoQuery()
+    // const { data: krakenData } = useFetchKrakenExchangeInfoQuery()
+    // const { data: bitfinexData = [] } = useFetchBitfinexExchangeInfoQuery()
+
+    // console.log(useFetchKrakenPriceQuery('WBTCUSD'))
+    // console.log(useFetchKrakenDetailsQuery('WBTCUSD'))
 
     useEffect(() => {
         if (binanceData.symbols && huobiData.data) {

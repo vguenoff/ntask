@@ -3,9 +3,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const krakenApiSlice = createApi({
     reducerPath: 'krakenApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://api.kraken.com/0/public',
+        baseUrl: '/',
         prepareHeaders(headers) {
-            headers.set('Accept', 'application/json')
+            headers.set('Content-Type', 'application/json')
 
             return headers
         },
@@ -14,25 +14,25 @@ export const krakenApiSlice = createApi({
         return {
             fetchKrakenExchangeInfo: builder.query({
                 query() {
-                    return `/AssetPairs`
+                    return `AssetPairs`
                 },
             }),
-            // fetchKrakenPrice: builder.query({
-            //     query(symbol) {
-            //         return `/ticker/price?symbol=${symbol}`
-            //     },
-            // }),
-            // fetchKrakenDetails: builder.query({
-            //     query(symbol) {
-            //         return `/trades?symbol=${symbol}&limit=5`
-            //     },
-            // }),
+            fetchKrakenPrice: builder.query({
+                query(symbol) {
+                    return `Ticker?pair=${symbol}`
+                },
+            }),
+            fetchKrakenDetails: builder.query({
+                query(symbol) {
+                    return `Trades?symbol=${symbol}`
+                },
+            }),
         }
     },
 })
 
 export const {
     useFetchKrakenExchangeInfoQuery,
-    // useFetchKrakenPriceQuery,
-    // useFetchKrakenDetailsQuery,
+    useFetchKrakenPriceQuery,
+    useFetchKrakenDetailsQuery,
 } = krakenApiSlice

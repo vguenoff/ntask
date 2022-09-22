@@ -3,23 +3,23 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const bitfinexApiSlice = createApi({
     reducerPath: 'bitfinexApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://api-pub.bitfinex.com/v2',
+        baseUrl: '/',
     }),
     endpoints(builder) {
         return {
             fetchBitfinexExchangeInfo: builder.query({
                 query() {
-                    return `/conf/pub:list:pair:exchange`
+                    return `conf/pub:list:pair:exchange`
                 },
             }),
             fetchBitfinexPrice: builder.query({
                 query(symbol) {
-                    return `/ticker/t${symbol}`
+                    return `ticker/t${symbol}`
                 },
             }),
             fetchBitfinexDetails: builder.query({
                 query(symbol) {
-                    return `/ticker/t${symbol}/hist`
+                    return `tickers/hist?symbols=t${symbol}&limit=5`
                 },
             }),
         }
