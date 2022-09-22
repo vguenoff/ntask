@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const binanceApiSlice = createApi({
-    reducerPath: 'api',
+    reducerPath: 'binanceApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://api.binance.com/api/v3',
     }),

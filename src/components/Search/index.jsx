@@ -10,7 +10,7 @@ import './index.scss'
 export default function Search() {
     const navigate = useNavigate()
     const { symbol } = useSplitParams()
-    const uniqueData = useAllExchangeInfoData()
+    const uniqueExchangePairsData = useAllExchangeInfoData()
     const [selectedSymbol, setSelectedSymbol] = useState(symbol)
     const [searchInput, setSearchInput] = useState('')
     const [matches, setMatches] = useState([])
@@ -40,7 +40,12 @@ export default function Search() {
                     value={searchInput}
                     onChange={e => {
                         setSearchInput(e.target.value)
-                        setMatches(findMatches(e.target.value, uniqueData))
+                        setMatches(
+                            findMatches(
+                                e.target.value,
+                                uniqueExchangePairsData,
+                            ),
+                        )
                         setSelectedSymbol(null)
                     }}
                 />
