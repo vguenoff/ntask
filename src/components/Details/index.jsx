@@ -2,27 +2,30 @@ import { useOutletContext } from 'react-router-dom'
 import useSplitParams from 'hooks/useSplitParams'
 
 import './index.scss'
+import useNormalizedDetailsData from 'hooks/useNormalizedDetailsData'
 
 export default function Details() {
-    const { useFetchDetails } = useOutletContext()
+    const { name, useFetchDetails } = useOutletContext()
     const { symbol } = useSplitParams()
-    const { data = [] } = useFetchDetails(symbol)
+    const { data } = useFetchDetails(symbol)
+    const normalizedData = useNormalizedDetailsData(name, data)
 
     return (
         <div className="Details">
             <ul>
-                {data?.map(({ id, price, qty, time }) => {
+                {normalizedData?.map(({ id, price, qty, time }) => {
                     const [date, hour] = new Date(time).toISOString().split('T')
                     const [hourFormat] = hour.split('.')
+                    const formattedTime = time
+                        ? `${hourFormat} / ${date}`
+                        : 'Unknown time'
 
                     return (
                         <li key={id}>
                             <span>
                                 Price/Qty: {price} / {qty}
                             </span>
-                            <span>
-                                {hourFormat} / {date}
-                            </span>
+                            <span>{formattedTime}</span>
                         </li>
                     )
                 })}

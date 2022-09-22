@@ -8,7 +8,7 @@ export function findMatches(searchInput, symbols) {
     )
 }
 
-export const removeDuplicates = duplicates => {
+export function removeDuplicates(duplicates) {
     const flag = {}
     const unique = []
 

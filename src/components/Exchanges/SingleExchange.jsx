@@ -1,10 +1,18 @@
 import { useState } from 'react'
 import { useNavigate, useLocation, Outlet } from 'react-router-dom'
+import { string, func } from 'prop-types'
 import useSplitParams from 'hooks/useSplitParams'
 import Modal from 'components/Modal'
 import { getObjValueFromPath } from 'utils'
 
 import './SingleExchange.scss'
+
+SingleExchange.protoTypes = {
+    name: string.isRequired,
+    useFetch: func.isRequired,
+    useFetchDetails: func.isRequired,
+    pricePath: string.isRequired,
+}
 
 export default function SingleExchange({
     name,
@@ -15,7 +23,9 @@ export default function SingleExchange({
     const { symbol, baseAsset, quoteAsset } = useSplitParams()
     const { data = {}, isFetching } = useFetch(symbol)
     const { pathname } = useLocation()
-    const [isShowing, setIsShowing] = useState(pathname.includes('details'))
+    const [isShowing, setIsShowing] = useState(
+        pathname.includes(`details/${name.toLowerCase()}`),
+    )
     const navigate = useNavigate()
 
     const toggleModal = () => {
@@ -44,7 +54,7 @@ export default function SingleExchange({
                         title={`${baseAsset}/${quoteAsset}: Last 5 transactions on ${name}`}
                         {...{ toggleModal, isShowing }}
                     >
-                        <Outlet context={{ useFetchDetails }} />
+                        <Outlet context={{ name, useFetchDetails }} />
                     </Modal>
                 </>
             )}

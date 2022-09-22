@@ -19,7 +19,7 @@ export const huobiApiSlice = createApi({
             }),
             fetchHuobiDetails: builder.query({
                 query(symbol) {
-                    return `/market/history/kline?period=1day&size=5&symbol=${symbol}`
+                    return `/market/history/kline?period=1day&size=5&symbol=${symbol.toLowerCase()}`
                 },
             }),
         }
