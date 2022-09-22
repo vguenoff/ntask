@@ -11,9 +11,8 @@ export default function useAllExchangeInfoData() {
     const { data: binanceData = {} } = useFetchBinanceExchangeInfoQuery()
     // const { data: bitfinexData = [] } = useFetchBitfinexExchangeInfoQuery() // cors error
     const { data: huobiData = {} } = useFetchHuobiExchangeInfoQuery()
-    const { data: krakenData = {} } = useFetchKrakenExchangeInfoQuery()
-
-    console.log(krakenData)
+    // const { data: krakenData = {} } = useFetchKrakenExchangeInfoQuery()
+    // console.log(krakenData)
 
     useEffect(() => {
         // console.log(bitfinexData)
