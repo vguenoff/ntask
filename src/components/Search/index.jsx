@@ -61,7 +61,12 @@ export default function Search() {
                         )
                     })}
                 </ul>
-                {selectedSymbol && <Outlet />}
+                {selectedSymbol && (
+                    <>
+                        <p>{symbol}</p>
+                        <Outlet />
+                    </>
+                )}
             </form>
         </div>
     )

@@ -33,22 +33,27 @@ export default function SingleExchange({
         isShowing && navigate(`/${baseAsset}_${quoteAsset}`)
     }
 
+    const priceAvailable = getObjValueFromPath(data, pricePath)
+
     return (
         <>
             {!isFetching && (
                 <>
                     <section className="results">
                         <span>{name}</span>
-                        <span
-                            className="symbol"
-                            onClick={() => {
-                                navigate(`details/${name.toLowerCase()}`)
-                                toggleModal()
-                            }}
-                        >
-                            1 {baseAsset} ={' '}
-                            {getObjValueFromPath(data, pricePath)} {quoteAsset}
-                        </span>
+                        {priceAvailable ? (
+                            <span
+                                className="symbol"
+                                onClick={() => {
+                                    navigate(`details/${name.toLowerCase()}`)
+                                    toggleModal()
+                                }}
+                            >
+                                1 {baseAsset} = {priceAvailable} {quoteAsset}
+                            </span>
+                        ) : (
+                            <span>Missing on current exchange.</span>
+                        )}
                     </section>
                     <Modal
                         title={`${baseAsset}/${quoteAsset}: Last 5 transactions on ${name}`}

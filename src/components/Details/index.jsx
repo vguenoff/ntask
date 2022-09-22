@@ -1,8 +1,8 @@
 import { useOutletContext } from 'react-router-dom'
 import useSplitParams from 'hooks/useSplitParams'
+import useNormalizedDetailsData from 'hooks/useNormalizedDetailsData'
 
 import './index.scss'
-import useNormalizedDetailsData from 'hooks/useNormalizedDetailsData'
 
 export default function Details() {
     const { name, useFetchDetails } = useOutletContext()
