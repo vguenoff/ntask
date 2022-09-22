@@ -1,18 +1,18 @@
 import { useState } from 'react'
+import { useNavigate, Outlet } from 'react-router-dom'
 
 import { findMatches } from 'utils'
-import { useNavigate, Outlet } from 'react-router-dom'
 import useSplitParams from 'hooks/useSplitParams'
 import useAllExchangeInfoData from 'hooks/useAllExchangeInfoData'
 
 import './index.scss'
 
 export default function Search() {
+    const navigate = useNavigate()
     const { symbol } = useSplitParams()
     const uniqueData = useAllExchangeInfoData()
-    const navigate = useNavigate()
-    const [searchInput, setSearchInput] = useState('')
     const [selectedSymbol, setSelectedSymbol] = useState(symbol)
+    const [searchInput, setSearchInput] = useState('')
     const [matches, setMatches] = useState([])
 
     const handleSelect = ({ baseAsset, quoteAsset, symbol }) => {
@@ -61,12 +61,7 @@ export default function Search() {
                         )
                     })}
                 </ul>
-                {selectedSymbol && (
-                    <>
-                        <p>{symbol}</p>
-                        <Outlet />
-                    </>
-                )}
+                {selectedSymbol && <Outlet />}
             </form>
         </div>
     )

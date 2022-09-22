@@ -17,13 +17,26 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <Search />,
+        errorElement: <p>Oh noo.. Something went wrong..</p>,
         children: [
             {
                 path: ':exchangePair',
                 element: <Exchanges />,
+                errorElement: (
+                    <p>
+                        Oh noo.. Something went wrong on the exchange
+                        information.
+                    </p>
+                ),
                 children: [
                     {
                         path: 'details/:exchangeName',
+                        errorElement: (
+                            <p>
+                                Oh noo.. Something went wrong on the pair
+                                details.
+                            </p>
+                        ),
                         element: <Details />,
                     },
                 ],

@@ -1,27 +1,24 @@
 import { useState } from 'react'
 import { useNavigate, useLocation, Outlet } from 'react-router-dom'
-import { string, func } from 'prop-types'
-import useSplitParams from 'hooks/useSplitParams'
+import { string, func, bool, number } from 'prop-types'
+
 import Modal from 'components/Modal'
-import { getObjValueFromPath } from 'utils'
+import useSplitParams from 'hooks/useSplitParams'
 
-import './SingleExchange.scss'
-
-SingleExchange.protoTypes = {
+SingleExchange.propTypes = {
     name: string.isRequired,
-    useFetch: func.isRequired,
     useFetchDetails: func.isRequired,
-    pricePath: string.isRequired,
+    isFetching: bool.isRequired,
+    priceAvailable: number.isRequired,
 }
 
 export default function SingleExchange({
     name,
-    useFetch,
     useFetchDetails,
-    pricePath,
+    isFetching,
+    priceAvailable,
 }) {
-    const { symbol, baseAsset, quoteAsset } = useSplitParams()
-    const { data = {}, isFetching } = useFetch(symbol)
+    const { baseAsset, quoteAsset } = useSplitParams()
     const { pathname } = useLocation()
     const [isShowing, setIsShowing] = useState(
         pathname.includes(`details/${name.toLowerCase()}`),
@@ -32,8 +29,6 @@ export default function SingleExchange({
         setIsShowing(!isShowing)
         isShowing && navigate(`/${baseAsset}_${quoteAsset}`)
     }
-
-    const priceAvailable = getObjValueFromPath(data, pricePath)
 
     return (
         <>

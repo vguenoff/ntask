@@ -1,4 +1,5 @@
 import { useOutletContext } from 'react-router-dom'
+
 import useSplitParams from 'hooks/useSplitParams'
 import useNormalizedDetailsData from 'hooks/useNormalizedDetailsData'
 
